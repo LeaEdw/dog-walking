@@ -1,17 +1,25 @@
-import { getWalkers } from "./database.js"
+import { getWalkers } from "./database.js";
 
-const walkers = getWalkers()
+const walkers = getWalkers();
 
+document.addEventListener("click", (clickEvent) => {
+  const clickedCity = clickEvent.target;
+  if (clickedCity.dataset.type === "city") {
+    window.alert(`${clickedCity.dataset.walkername} is servicing ${clickedCity.innerText}.`);
+  }
+});
 
 export const CityList = () => {
-    let citiesHTML = "<ol>"
+  let citiesHTML = "<ol>";
 
-    for (const walker of walkers) {
-        citiesHTML += `<li>${walker.city}</li>`
-    }
+  for (const walker of walkers) {
+    citiesHTML += `<li data-type="city"
+                        data-walkername="${walker.name}">
+                            ${walker.city}
+                   </li>`;
+  }
 
-    citiesHTML += "</ol>"
+  citiesHTML += "</ol>";
 
-    return citiesHTML
-}
-
+  return citiesHTML;
+};
