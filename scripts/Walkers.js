@@ -8,7 +8,7 @@ document.addEventListener(
         const clickedWalker = theClickEvent.target
 
         if (clickedWalker.dataset.type === "walker") {
-            window.alert(`This walker works in ${clickedWalker.dataset.city}.`)
+            window.alert(`${clickedWalker.innerText} works in ${clickedWalker.dataset.city}.`)
         }
     }
 
