@@ -6,7 +6,7 @@ document.addEventListener(
     "click",
     (theClickEvent) => {
         const clickedWalker = theClickEvent.target
-
+// Create a variable to target the city key for the dynamic aspect of the window alert for the city.
         if (clickedWalker.dataset.type === "walker") {
             window.alert(`${clickedWalker.innerText} works in ${clickedWalker.dataset.city}.`)
         }
@@ -16,6 +16,8 @@ document.addEventListener(
 
 export const Walkers = () => {
     let walkerHTML = "<ul>"
+
+// Update the city to target the cityId
 
     for (const walker of walkers) {
         walkerHTML += `<li 
@@ -32,3 +34,4 @@ export const Walkers = () => {
 
 }
 
+//This module will have changes based on the changes to incorporate the foreign Key.
