@@ -8,12 +8,12 @@ const cities = getCities();
 
 document.addEventListener("click", (clickEvent) => {
   const clickedCity = clickEvent.target;
-  const walkerCity = clickedCity.dataset.cityforeignkey;
+  const walkerCity = clickedCity.dataset.city;
 
   //Find the whole city objects based on the cityId from above
 
   for (const walker of walkers) {
-    if (walker.id === parseInt(walkerCity)) {
+    if (walker.cityId === parseInt(walkerCity)) {
       window.alert(`${walker.name} is servicing ${clickedCity.innerText}.`);
     }
   }
@@ -27,7 +27,7 @@ export const CityList = () => {
 
     citiesHTML += `<li 
                     data-type="${city.name}"
-                    data-cityForeignKey="${city.id}">
+                    data-city="${city.id}">
                             ${city.name}
                    </li>`;
   }

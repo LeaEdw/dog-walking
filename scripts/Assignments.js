@@ -1,55 +1,52 @@
-import { getCities, getPets, getWalkers } from "./database.js"
+import { getPets, getWalkers } from "./database.js";
 
 // Get copy of state for use in this module
-const pets = getPets()
-const walkers = getWalkers()
-const cities = getCities()
-
+const pets = getPets();
+const walkers = getWalkers();
 
 // Function whose responsibility is to find the walker assigned to a pet
-const findWalker = (pet, allWalkers, cities) => {
-    let petWalker = null
+const findWalker = (pet, allWalkers) => {
+  let petWalker = null;
 
-    for (const walker of allWalkers) {
-        if (walker.id === pet.walkerId && walkers.cityId === cities.id) {
-            petWalker = walker
-        }
+  for (const walker of allWalkers) {
+    if (walker.id === pet.walkerId) {
+      petWalker = walker;
     }
+  }
 
-    return petWalker
-}
+  return petWalker;
+};
 
-// // Function whose responsibility is to find the city where each walker works
-// const findCity = (walker, allCities) => {
-//     let walkerCity = null
+// Function whose responsibility is to find the city where each walker works
+export const findCity = (walker, allCities) => {
+  let walkerCity = null;
 
-//     for(const city of allCities) {
-//         if(city.id === walker.cityId) {
-//             walkerCity = city
-//         }
-//     }
+  for (const city of allCities) {
+    if (city.id === walker.cityId) {
+      walkerCity = city;
+    }
+  }
 
-//     return walkerCity
-// }
+  return walkerCity;
+};
 
 export const Assignments = () => {
-    let assignmentHTML = ""
-    assignmentHTML = "<ul>"
-// Update "currentPetWalker.city" to target the new foreign key
-    for (const currentPet of pets) {
-        const currentPetWalker = findWalker(currentPet, walkers, cities)
-        //const currentWalkerCity = findCity(walkers, cities)
-        assignmentHTML = `
+  let assignmentHTML = "";
+  assignmentHTML += "<ul>";
+
+  // Update "currentPetWalker.city" to target the new foreign key
+
+  for (const currentPet of pets) {
+    const currentPetWalker = findWalker(currentPet, walkers);
+    assignmentHTML += `
             <li>
                 ${currentPet.name} is being walked by
-                ${currentPetWalker.name} in ${currentPetWalker.city}
-            </li>
-        `
-    }
+                ${currentPetWalker.name}.</li>`;
+  }
 
-    assignmentHTML += "</ul>"
+  assignmentHTML += "</ul>";
 
-    return assignmentHTML
-}
+  return assignmentHTML;
+};
 
 //This module will have changes based on the changes to incorporate the foreign Key.

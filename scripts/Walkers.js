@@ -1,37 +1,37 @@
-import { getWalkers } from "./database.js"
+import { getCities, getWalkers } from "./database.js";
 
-const walkers = getWalkers()
+const walkers = getWalkers();
 
-document.addEventListener(
-    "click",
-    (theClickEvent) => {
-        const clickedWalker = theClickEvent.target
-// Create a variable to target the city key for the dynamic aspect of the window alert for the city.
-        if (clickedWalker.dataset.type === "walker") {
-            window.alert(`${clickedWalker.innerText} works in ${clickedWalker.dataset.city}.`)
-        }
+document.addEventListener("click", (theClickEvent) => {
+  const clickedWalker = theClickEvent.target;
+  const cityId = clickedWalker.dataset.cityforeignkey;
+  // Create a variable to target the city key for the dynamic aspect of the window alert for the city.
+
+  const cities = getCities();
+
+  for (const city of cities) {
+    if (city.id === parseInt(cityId)) {
+      window.alert(`${clickedWalker.innerText} works in ${city.name}.`);
     }
-
-)
+  }
+});
 
 export const Walkers = () => {
-    let walkerHTML = "<ul>"
+  let walkerHTML = "<ul>";
+  // Update the city to target the cityId
 
-// Update the city to target the cityId
-
-    for (const walker of walkers) {
-        walkerHTML += `<li 
+  for (const walker of walkers) {
+    walkerHTML += `<li 
                         data-id="${walker.id}"
-                        data-city="${walker.city}"
+                        data-cityForeignKey="${walker.cityId}"
                         data-type="walker">
                             ${walker.name}
-                       </li>`
-    }
+                       </li>`;
+  }
 
-    walkerHTML += "</ul>"
+  walkerHTML += "</ul>";
 
-    return walkerHTML
-
-}
+  return walkerHTML;
+};
 
 //This module will have changes based on the changes to incorporate the foreign Key.
